@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">EasyDict</string>
+    <string name="frequency">当代语料库词频顺序:</string>
+    <string name="bnc">英国国家语料库词频顺序:</string>
+    <string name="tags">标签:</string>
+    <string name="oxford">牛津三千核心词汇:</string>
+    <string name="collins">柯林斯星级:</string>
+    <string name="definition">单词释义（英文）:</string>
+    <string name="translation">单词释义（中文）:</string>
+    <string name="placeholder">_</string>
+    <string name="favorite">收藏</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
