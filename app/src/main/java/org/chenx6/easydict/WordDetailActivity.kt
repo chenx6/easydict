@@ -1,32 +1,19 @@
 package org.chenx6.easydict
 
 import android.os.Bundle
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.chenx6.easydict.databinding.ActivityWordDetailBinding
 import org.chenx6.easydict.entities.WordEntity
 import org.chenx6.easydict.entities.WordFavorite
 import org.chenx6.easydict.entities.WordHistory
 
 class WordDetailActivity : AppCompatActivity() {
-    private lateinit var topAppBar: MaterialToolbar
-    private lateinit var wordCardView: TextView
-    private lateinit var phoneticCardView: TextView
-    private lateinit var definitionCardView: TextView
-    private lateinit var translationCardView: TextView
-    private lateinit var collinsCardView: TextView
-    private lateinit var oxfordCardView: TextView
-    private lateinit var tagsCardView: TextView
-    private lateinit var bncCardView: TextView
-    private lateinit var frequencyCardView: TextView
-    private lateinit var exchangeView: TextView
-    private lateinit var favoriteButton: FloatingActionButton
+    private lateinit var binding: ActivityWordDetailBinding
     private lateinit var selectedWord: WordEntity
 
     private val tagReplaceTable = hashMapOf(
@@ -53,22 +40,10 @@ class WordDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_word_detail)
-
-        topAppBar = findViewById(R.id.topAppBar)
-        wordCardView = findViewById(R.id.wordCardView)
-        phoneticCardView = findViewById(R.id.phoneticCardView)
-        definitionCardView = findViewById(R.id.definitionCardView)
-        translationCardView = findViewById(R.id.translationCardView)
-        collinsCardView = findViewById(R.id.collinsCardView)
-        oxfordCardView = findViewById(R.id.oxfordCardView)
-        tagsCardView = findViewById(R.id.tagsCardView)
-        bncCardView = findViewById(R.id.bncCardView)
-        frequencyCardView = findViewById(R.id.frqCardView)
-        favoriteButton = findViewById(R.id.favoriteButton)
-        exchangeView = findViewById(R.id.exchangeView)
+        binding = ActivityWordDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         // Top app Bar
-        topAppBar.setNavigationOnClickListener {
+        binding.topAppBar.setNavigationOnClickListener {
             finish()
         }
         // Intent
@@ -96,7 +71,7 @@ class WordDetailActivity : AppCompatActivity() {
             }
         }
         // Favorite button
-        favoriteButton.setOnClickListener {
+        binding.favoriteButton.setOnClickListener {
             lifecycleScope.launch {
                 val database = getDatabase()
                 // if this word is favorite
@@ -124,23 +99,23 @@ class WordDetailActivity : AppCompatActivity() {
     }
 
     private fun initCard(word: WordEntity) {
-        wordCardView.text = word.word
-        phoneticCardView.text = word.phonetic
-        definitionCardView.text = word.definition?.replace("\\n", "\n")
-        translationCardView.text = word.translation?.replace("\\n", "\n")
-        exchangeView.text = parseExchange(word.exchange)
-        collinsCardView.text = "${word.collins} 星" // TODO
-        oxfordCardView.text = if (word.oxford == 0) "否" else "是"
-        tagsCardView.text = parseTags(word.tag)
-        bncCardView.text = word.bnc?.toString() ?: "无"
-        frequencyCardView.text = word.frq?.toString() ?: "无"
+        binding.wordCardView.text = word.word
+        binding.phoneticCardView.text = word.phonetic
+        binding.definitionCardView.text = word.definition?.replace("\\n", "\n")
+        binding.translationCardView.text = word.translation?.replace("\\n", "\n")
+        binding.exchangeView.text = parseExchange(word.exchange)
+        binding.collinsCardView.text = "${word.collins} 星" // TODO
+        binding.oxfordCardView.text = if (word.oxford == 0) "否" else "是"
+        binding.tagsCardView.text = parseTags(word.tag)
+        binding.bncCardView.text = word.bnc?.toString() ?: "无"
+        binding.frqCardView.text = word.frq?.toString() ?: "无"
     }
 
     private fun getDatabase() =
         WordDatabase.getInstance(applicationContext).getWordDao()
 
     private fun setFavoriteIcon(isFavorite: Boolean) =
-        favoriteButton.setImageResource(
+        binding.favoriteButton.setImageResource(
             if (isFavorite) {
                 R.drawable.ic_baseline_star_24
             } else {
