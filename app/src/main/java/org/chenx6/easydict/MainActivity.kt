@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.chenx6.easydict.fragments.FavoriteWordFragment
 import org.chenx6.easydict.fragments.MainFragment
+import org.chenx6.easydict.fragments.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navigationView: BottomNavigationView
@@ -16,13 +17,18 @@ class MainActivity : AppCompatActivity() {
 
         val mainFragment = MainFragment()
         val favoriteFragment = FavoriteWordFragment()
-        setVisibleFragment(mainFragment)
+        val preferenceFragment = SettingsFragment()
+        if (firstInit) {
+            setVisibleFragment(mainFragment)
+            firstInit = false
+        }
 
         navigationView = findViewById(R.id.navigationView)
         navigationView.setOnItemSelectedListener { selector ->
             val replaceFragment = when (selector.itemId) {
                 R.id.menu_home -> mainFragment
                 R.id.menu_favorite -> favoriteFragment
+                R.id.menu_settings -> preferenceFragment
                 else -> mainFragment
             }
             setVisibleFragment(replaceFragment)
@@ -35,4 +41,8 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commitNow()
+
+    companion object {
+        var firstInit = true  // Dirty patch to ensure refresh() won't break the origin fragment
+    }
 }
