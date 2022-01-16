@@ -40,9 +40,11 @@ class SelectedTextProcessActivity : Activity() {
                     val selectedWordView: TextView = findViewById(R.id.selectedWordView)
                     val selectedTranslateView: TextView = findViewById(R.id.selectedTranslateView)
                     val closeResultButton: ImageButton = findViewById(R.id.closeResultButton)
+                    val resultEmptyButton: ImageButton = findViewById(R.id.resultEmptyButton)
                     selectedWordView.text = word
                     selectedTranslateView.text = text
                     closeResultButton.setOnClickListener { finish() }
+                    resultEmptyButton.setOnClickListener { finish() }
                 }
             }
         }
