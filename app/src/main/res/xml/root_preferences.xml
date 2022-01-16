@@ -10,6 +10,14 @@
             app:title="主题设置"
             app:useSimpleSummaryProvider="true" />
 
+        <ListPreference
+            app:key="result_show"
+            app:title="选中翻译设置"
+            app:entries="@array/result_show_entries"
+            app:entryValues="@array/result_show_values"
+            app:defaultValue="toast"
+            app:useSimpleSummaryProvider="true"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -5,7 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.253125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_selected_text_process.xml" value="0.20520833333333333" />
+        <entry key="app/src/main/res/layout/activity_selected_text_process.xml" value="0.67" />
         <entry key="app/src/main/res/layout/activity_word_detail.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_favorite_word.xml" value="0.23697916666666666" />
         <entry key="app/src/main/res/layout/fragment_item.xml" value="0.23697916666666666" />

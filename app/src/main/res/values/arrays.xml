@@ -11,4 +11,14 @@
         <item>dark</item>
         <item>auto</item>
     </string-array>
+
+    <string-array name="result_show_entries">
+        <item>Toast</item>
+        <item>Float</item>
+    </string-array>
+
+    <string-array name="result_show_values">
+        <item>toast</item>
+        <item>float</item>
+    </string-array>
 </resources>
