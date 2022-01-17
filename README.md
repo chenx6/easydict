@@ -7,11 +7,20 @@ A dictionary that works out of box
 - Basic dictionary functions, query word, show the definition and translation
 - Show the query history
 - "Favorite" words
+- Tap and query
+- ...
+
+## Screenshot
+
+| main ui | result page | favorite page | tap and query |
+| - | - | - | - |
+| ![main ui](docs/images/Screenshot_20220117-113742_EasyDict.png) | ![result page](docs/images/Screenshot_20220117-113805_EasyDict.png) | ![favorite](docs/images/Screenshot_20220117-113827_EasyDict.png) | ![tap and query](docs/images/Screenshot_20220117-113943_EasyDict.png) |
 
 ## Acknowledgment
 
 - [skywind3000/ECDICT](https://github.com/skywind3000/ECDICT)
-- [Android Jetpack](https://developer.android.google.cn/jetpack?hl=zh-cn)
+- [Android Jetpack](https://developer.android.google.cn/jetpack?hl=zh-cn) 
+- [papirus-icon-theme](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)
 - And more
 
 ## License
