@@ -18,10 +18,9 @@ class MainActivity : AppCompatActivity() {
         val mainFragment = MainFragment()
         val favoriteFragment = FavoriteWordFragment()
         val preferenceFragment = SettingsFragment()
-        if (firstInit) {
+        // if activity is loading first time, show the fragment
+        if (savedInstanceState == null)
             setVisibleFragment(mainFragment)
-            firstInit = false
-        }
 
         navigationView = findViewById(R.id.navigationView)
         navigationView.setOnItemSelectedListener { selector ->
@@ -41,8 +40,4 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commitNow()
-
-    companion object {
-        var firstInit = true  // Dirty patch to ensure refresh() won't break the origin fragment
-    }
 }
