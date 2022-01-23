@@ -18,6 +18,11 @@
             app:defaultValue="toast"
             app:useSimpleSummaryProvider="true"/>
 
+        <Preference
+            app:key="clean_history"
+            app:title="清除所有历史记录"
+            app:summary="清除所有查询单词的历史记录" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

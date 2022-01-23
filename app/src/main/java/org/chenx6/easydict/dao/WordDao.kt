@@ -29,4 +29,10 @@ interface WordDao {
 
     @Query("SELECT 1 FROM wordfavorite WHERE :wordId = wordfavorite.wordId")
     suspend fun isFavorite(wordId: Int): Int?
+
+    @Delete
+    suspend fun deleteQueryHistory(word: WordHistory)
+
+    @Query("DELETE FROM wordhistory")
+    suspend fun cleanAllQueryHistory()
 }
