@@ -2,6 +2,10 @@
 
 A dictionary that works out of box
 
+## Download
+
+[From Github Release](https://github.com/chenx6/easydict/releases)
+
 ## Features
 
 - Basic dictionary functions, query word, show the definition and translation
