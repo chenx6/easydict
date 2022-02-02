@@ -8,6 +8,7 @@ A dictionary that works out of box
 
 ## Features
 
+- Completely offline, no network needed
 - Basic dictionary functions, query word, show the definition and translation
 - Show the query history
 - "Favorite" words
@@ -18,7 +19,7 @@ A dictionary that works out of box
 
 | main ui | result page | favorite page | tap and query |
 | - | - | - | - |
-| ![main ui](docs/images/Screenshot_20220117-113742_EasyDict.png) | ![result page](docs/images/Screenshot_20220117-113805_EasyDict.png) | ![favorite](docs/images/Screenshot_20220117-113827_EasyDict.png) | ![tap and query](docs/images/Screenshot_20220117-113943_EasyDict.png) |
+| ![main ui](docs/images/Screenshot_main_ui.png) | ![result page](docs/images/Screenshot_result_page.png) | ![favorite](docs/images/Screenshot_favorite.png) | ![tap and query](docs/images/Screenshot_tap_and_query.png) |
 
 ## Acknowledgment
 
