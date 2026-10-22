@@ -1,3 +1,8 @@
+# /// script
+# dependencies = [
+#   "tqdm"
+# ]
+# ///
 """
 Minimal version dataset:
 sqlite> select count(*) from dict where collins != '' or oxford = 1 or tag != '' or bnc != 0 or frq != 0;
@@ -35,7 +40,14 @@ def create_db(conn: Connection):
             "audio" TEXT
         );
         CREATE UNIQUE INDEX IF NOT EXISTS "index_dict_word" ON dict (word);
-        CREATE INDEX IF NOT EXISTS "index_dict_sw_word" ON dict (sw, word collate nocase);"""
+        CREATE INDEX IF NOT EXISTS "index_dict_sw_word" ON dict (sw, word collate nocase);
+        CREATE TABLE IF NOT EXISTS "lemma" (
+            "word" TEXT NOT NULL,
+            "dict_id" INTEGER NOT NULL,
+            PRIMARY KEY ("word", "dict_id")
+        );
+        CREATE INDEX IF NOT EXISTS "index_lemma_word" ON lemma ("word");
+        """
     )
     conn.commit()
 
@@ -49,6 +61,16 @@ def import_csv_sqlite(conn: Connection):
             if is_fl:
                 is_fl = False
                 continue
+            # Keep only words in the minimal dataset:
+            # collins != '' OR oxford = 1 OR tag != '' OR bnc != 0 OR frq != 0
+            if not (
+                row[5] != ''
+                or row[6] == '1'
+                or row[7] != ''
+                or row[8] != '0'
+                or row[9] != '0'
+            ):
+                continue
             sw = stripword(row[0])
             row.insert(1, sw)
             try:
@@ -60,6 +82,22 @@ def import_csv_sqlite(conn: Connection):
                 )
             except IntegrityError as e:
                 print(e, row)
+        conn.commit()
+    with open("lemma.en.txt") as f:
+        cursor = conn.cursor()
+        for line in tqdm(f.readlines()):
+            if line.startswith(";"):
+                continue
+            line = line.strip()
+            # line example: "woman/60142 -> women"
+            tokens = line.split(" -> ")
+            orig = tokens[0].split("/")[0]
+            lemmas = tokens[1].split(",")
+            cursor.execute("SELECT id FROM dict WHERE word = ?", (orig,))
+            if res := cursor.fetchone():
+                id_ = res[0]
+                for lemma in lemmas:
+                    cursor.execute("INSERT OR IGNORE INTO lemma (word, dict_id) VALUES (?, ?)", (lemma, id_))
         conn.commit()
 
 

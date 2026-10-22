@@ -22,7 +22,7 @@ class SelectedTextProcessActivity : Activity() {
         mainScope.launch {
             // Query word
             val resultList = withContext(Dispatchers.IO) {
-                WordDatabase.getInstance(applicationContext).getWordDao().searchWord(word, 1)
+                WordDatabase.getInstance(applicationContext).getWordDao().searchWordWithLemma(word, 1)
             }
             val text = if (resultList.isEmpty()) {
                 "没有查续到 $word"

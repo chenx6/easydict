@@ -87,7 +87,7 @@ class MainFragment : Fragment() {
     }
 
     suspend fun searchWords(word: String): List<WordEntity> =
-        WordDatabase.getInstance(requireContext()).getWordDao().searchWord(word)
+        WordDatabase.getInstance(requireContext()).getWordDao().searchWordWithLemma(word)
 
     suspend fun getHistory(): List<WordEntity> =
         WordDatabase

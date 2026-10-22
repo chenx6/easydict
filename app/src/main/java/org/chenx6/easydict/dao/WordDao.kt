@@ -8,6 +8,22 @@ interface WordDao {
     @Query("SELECT * FROM dict WHERE word LIKE :word || '%' LIMIT :limit OFFSET :offset")
     suspend fun searchWord(word: String, limit: Int = 10, offset: Int = 0): List<WordEntity>
 
+    @Query("SELECT dict.* FROM dict JOIN lemma ON dict.id = lemma.dict_id WHERE lemma.word = :word COLLATE NOCASE LIMIT :limit OFFSET :offset")
+    suspend fun searchWordLemma(word: String, limit: Int = 10, offset: Int = 0): List<WordEntity>
+
+    /**
+     * Search words normally first, and fall back to the lemma table (inflected forms)
+     * only when the normal search returns no result.
+     */
+    suspend fun searchWordWithLemma(
+        word: String,
+        limit: Int = 10,
+        offset: Int = 0
+    ): List<WordEntity> =
+        searchWord(word, limit, offset).ifEmpty {
+            searchWordLemma(word, limit, offset)
+        }
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addHistory(history: WordHistory)
 

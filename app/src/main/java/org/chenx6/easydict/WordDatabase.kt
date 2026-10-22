@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import org.chenx6.easydict.dao.WordDao
+import org.chenx6.easydict.entities.LemmaEntity
 import org.chenx6.easydict.entities.WordEntity
 import org.chenx6.easydict.entities.WordFavorite
 import org.chenx6.easydict.entities.WordHistory
@@ -14,7 +15,7 @@ import org.chenx6.easydict.entities.WordHistory
 @Database(
     version = 2,
     exportSchema = false,
-    entities = [WordEntity::class, WordHistory::class, WordFavorite::class]
+    entities = [WordEntity::class, LemmaEntity::class, WordHistory::class, WordFavorite::class]
 )
 abstract class WordDatabase : RoomDatabase() {
     abstract fun getWordDao(): WordDao
