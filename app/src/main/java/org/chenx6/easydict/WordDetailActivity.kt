@@ -52,7 +52,12 @@ class WordDetailActivity : AppCompatActivity() {
             // Fetch data from db and render
             val database = getDatabase()
             val resultList = withContext(Dispatchers.IO) {
-                database.searchWord(word)
+                database.searchWordWithLemma(word)
+            }
+            if (resultList.isEmpty()) {
+                Toast.makeText(applicationContext, "没有查询到 $word", Toast.LENGTH_SHORT).show()
+                finish()
+                return@launch
             }
             selectedWord = resultList[0]
             initCard(selectedWord)
